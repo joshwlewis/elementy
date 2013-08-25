@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Elementy::VERSION
   spec.authors       = ["Josh Lewis"]
   spec.email         = ["josh.w.lewis@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = "Lookup Data for Elements in the Periodic Table"
+  spec.summary       = "Lookup Data for Elements in the Periodic Table"
+  spec.homepage      = "https://github.com/joshwlewis/elementy"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

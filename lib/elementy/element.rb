@@ -1,26 +1,28 @@
 require 'yaml'
 module Elementy
   class Element
-    extend Enumerable
-    attr_accessor :group, :position, :number, :name, :molar, :symbol, :electrons
+    attr_accessor :number, :symbol, :name, :molar, :group, :position, :electrons
 
-    def self.all
-      @all ||= defaults.map{|d| new d }
-    end
+    class << self
+      include Enumerable
+      def all
+        @all ||= defaults.map { |d| new d }
+      end
 
-    def self.each
-      all.each{|e| yield e }
-    end
+      def each
+        all.each { |e| yield e }
+      end
 
-    def self.defaults
-      YAML.load(File.open("#{Elementy.root}/data/elements.yaml"))
-    end
+      def defaults
+        YAML.load(File.open "#{Elementy.root}/data/elements.yaml")
+      end
 
-    def self.search(term)
-      if term =~ /\A\d*\Z/
-        self.find{|e| e.number == term.to_i}
-      else
-        self.find{|e| [e.symbol, e.name].any?{|a| a.upcase == term.upcase}}
+      def search(term)
+        if term.is_a?(Numeric) || term =~ /\A\d*\Z/
+          find { |e| e.number == term.to_i}
+        else
+          find { |e| [e.symbol, e.name].any? { |a| a.upcase == term.to_s.upcase} }
+        end
       end
     end
 
