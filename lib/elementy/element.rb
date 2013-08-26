@@ -19,9 +19,9 @@ module Elementy
 
       def search(term)
         if term.is_a?(Numeric) || term =~ /\A\d*\Z/
-          find { |e| e.number == term.to_i}
+          find { |e| e.number == term.to_i }
         else
-          find { |e| [e.symbol, e.name].any? { |a| a.upcase == term.to_s.upcase} }
+          find { |e| [e.symbol, e.name].map(&:upcase).include? term.to_s.upcase }
         end
       end
     end
